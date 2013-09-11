@@ -5,7 +5,7 @@ description:
   Parallel Haskell suffers from the problem, that the sequential part races
   with the evaluation of the sparks. This results often in \"fizzled\" sparks
   and reduced parallelity.
-
+  .
   This package provides utility functions adding \"barrier\" annotations. They
   basically state, that the spark pool should be flushed, before the
   computation continues.
