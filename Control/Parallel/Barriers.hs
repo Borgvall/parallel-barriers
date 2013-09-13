@@ -1,3 +1,28 @@
+{- |
+One drawback of Parallel Haskell is, that the sequential part of the programm
+/races/ with the evaluation of sparks (sparked by 'par'). This often results in
+duplicated work (\"fizzled\" sparks), lost parallelity and unnecessary
+overhead, and limits the performance gain of running computations in parallel.
+
+To avoid these races, this module allows to add \"barriers\". A barrier signals
+the run time system, that the sparks should be run, before the sequential part
+of the computation continues¹. Adding a barrier adds significant overhead and
+might reduce parallelity. In general it is preferable, to add just a /single/
+barrier.
+
+Reasonable ways to achieve parallelity are:
+
+ 1. Evaluate the elements in data structures in parallel by using
+ 'forceParList' or 'forceParFoldable'.
+
+ 2. In a sequence of calls to 'par' and 'pseq', change the /last/ call of
+ 'pseq' to 'pseqBarrier'.
+
+ 3. Wrap a sequence of 'par' calls with 'forceParallel'.
+
+¹ If bottom is in the spark pool, the sequential part might never be
+continued.
+-}
 module Control.Parallel.Barriers (
   -- * Parallel Helper Functions
   parBarrier, pseqBarrier, forceParallel,
