@@ -24,3 +24,13 @@ library
   build-depends:
     base >=4.3 && <= 4.7,
     parallel >= 1.0 && <= 3.3
+
+Benchmark collatzbenchmark
+  type: exitcode-stdio-1.0
+  GHC-Options: -O2 -threaded
+  main-is: collatzbenchmark.hs
+  build-depends:
+    criterion,
+    base >=4.3 && <= 4.7,
+    parallel >= 1.0 && <= 3.3
+
